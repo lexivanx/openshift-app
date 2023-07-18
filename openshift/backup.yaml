@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: backup-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: backup-container
+        image: <backup-image>
+        command: ["your-backup-command"]
+        volumeMounts:
+        - name: backup-volume
+          mountPath: /backup
+      volumes:
+      - name: backup-volume
+        persistentVolumeClaim:
+          claimName: flask-app-pvc
+      restartPolicy: OnFailure

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: secure-flask-app-route
+spec:
+  host: www.example.com
+  to:
+    kind: Service
+    name: flask-app
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
